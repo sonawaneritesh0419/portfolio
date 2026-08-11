@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (Tailwind v4 requires an explicit custom variant) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Palette is defined as CSS variables below (light + .dark overrides)
+     so every utility (bg-bg, text-ink, border-border, ...) automatically
+     re-themes when the .dark class toggles — no duplicate utility sets. */
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-border: var(--c-border);
+  --color-ink: var(--c-ink);
+  --color-ink-muted: var(--c-ink-muted);
+  --color-ink-faint: var(--c-ink-faint);
+  --color-primary: var(--c-primary);
+  --color-primary-ink: var(--c-primary-ink);
+  --color-accent: var(--c-accent);
+  --color-coral: var(--c-coral);
+  --color-danger: var(--c-danger);
+
+  --breakpoint-xs: 420px;
+}
+
+:root {
+  --c-bg: #f7f7fb;
+  --c-surface: #ffffff;
+  --c-surface-2: #eef0f8;
+  --c-border: #e3e4ee;
+  --c-ink: #14141f;
+  --c-ink-muted: #5b5b70;
+  --c-ink-faint: #8d8da3;
+  --c-primary: #6c5ce7;
+  --c-primary-ink: #ffffff;
+  --c-accent: #00b884;
+  --c-coral: #ff7a59;
+  --c-danger: #e0374a;
+}
+
+.dark {
+  --c-bg: #0a0a12;
+  --c-surface: #14141f;
+  --c-surface-2: #1c1c2a;
+  --c-border: #2a2a3c;
+  --c-ink: #f1f1f8;
+  --c-ink-muted: #a5a5bd;
+  --c-ink-faint: #6d6d86;
+  --c-primary: #8f7dff;
+  --c-primary-ink: #0a0a12;
+  --c-accent: #2fe8a8;
+  --c-coral: #ff9478;
+  --c-danger: #ff6b7f;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .mesh-bg {
+    background-image:
+      radial-gradient(38% 45% at 12% 8%, color-mix(in srgb, var(--color-primary) 22%, transparent), transparent 70%),
+      radial-gradient(32% 38% at 92% 18%, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent 70%),
+      radial-gradient(45% 40% at 50% 100%, color-mix(in srgb, var(--color-coral) 12%, transparent), transparent 70%);
+  }
+  .noise-card {
+    background-color: var(--color-surface);
+    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-ink) 4%, transparent) inset;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 999px;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
