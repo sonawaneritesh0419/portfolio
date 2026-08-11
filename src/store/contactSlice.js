@@ -18,6 +18,7 @@ export const sendMessage = createAsyncThunk(
           access_key: ACCESS_KEY,
           name: payload.name,
           email: payload.email,
+          phone: payload.phone,
           subject: payload.subject || `New portfolio contact from ${payload.name}`,
           message: payload.message,
           from_name: `${profile.name} Portfolio`,
