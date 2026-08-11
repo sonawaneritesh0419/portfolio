@@ -1,46 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import emailjs from "@emailjs/browser";
 import { profile } from "@/data/resume";
 
-// EmailJS lets a static React site deliver contact-form submissions
-// straight to a real inbox with no backend server. Create a free account
-// at emailjs.com, connect your Gmail, and drop the three IDs below into
-// a .env file (see .env.example) — full walkthrough in README.md.
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-const isConfigured = Boolean(SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY);
+const ACCESS_KEY =
+  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "548440ef-03ab-4c46-828f-a7c25e2cf274";
 
 export const sendMessage = createAsyncThunk(
   "contact/sendMessage",
   async (payload, { rejectWithValue }) => {
-    if (isConfigured) {
-      try {
-        await emailjs.send(
-          SERVICE_ID,
-          TEMPLATE_ID,
-          {
-            from_name: payload.name,
-            from_email: payload.email,
-            subject: payload.subject || "New portfolio contact",
-            message: payload.message,
-            to_email: profile.email,
-          },
-          { publicKey: PUBLIC_KEY }
-        );
-        return { via: "emailjs" };
-      } catch (err) {
-        return rejectWithValue(err?.text || err?.message || "Could not send message");
-      }
-    }
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          name: payload.name,
+          email: payload.email,
+          subject: payload.subject || `New portfolio contact from ${payload.name}`,
+          message: payload.message,
+          from_name: `${profile.name} Portfolio`,
+        }),
+      });
 
-    // Fallback when EmailJS isn't configured yet: open a pre-filled
-    // mailto so the message still reaches the inbox, no setup required.
-    const subject = encodeURIComponent(payload.subject || `Portfolio contact from ${payload.name}`);
-    const body = encodeURIComponent(`${payload.message}\n\n— ${payload.name} (${payload.email})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    return { via: "mailto" };
+      const data = await res.json();
+
+      if (!data.success) {
+        return rejectWithValue(data.message || "Something went wrong. Please try again.");
+      }
+
+      return { via: "web3forms" };
+    } catch (err) {
+      return rejectWithValue(err?.message || "Network error — please try again.");
+    }
   }
 );
 
