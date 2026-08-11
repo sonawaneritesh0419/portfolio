@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { sendMessage, resetStatus } from "@/store/contactSlice";
 import { profile } from "@/data/resume";
+import { validateEmail, validatePhone, sanitizeDigits } from "@/lib/validators";
 import { cn } from "@/lib/utils";
 
 export default function Contact() {
@@ -68,18 +69,29 @@ export default function Contact() {
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Email" error={errors.email}>
+                <Field label="Phone" error={errors.phone}>
                   <input
-                    type="email"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: { value: /^\S+@\S+\.\S+$/, message: "Enter a valid email" },
-                    })}
-                    placeholder="you@example.com"
+                    type="tel"
+                    inputMode="numeric"
+                    maxLength={10}
+                    {...register("phone", { validate: validatePhone })}
+                    onInput={(e) => {
+                      e.target.value = sanitizeDigits(e.target.value);
+                    }}
+                    placeholder="10-digit mobile number"
                     className={inputClass}
                   />
                 </Field>
               </div>
+
+              <Field label="Email" error={errors.email}>
+                <input
+                  type="email"
+                  {...register("email", { validate: validateEmail })}
+                  placeholder="you@example.com"
+                  className={inputClass}
+                />
+              </Field>
 
               <Field label="Subject" error={errors.subject}>
                 <input
