@@ -7,7 +7,7 @@ import { profile, education, highlights } from "@/data/resume";
 const FACTS = [
   { icon: Briefcase, label: "Role", value: profile.role },
   { icon: MapPin, label: "Based in", value: profile.location.split(",").slice(-2).join(",").trim() },
-  { icon: Award, label: "Experience", value: "5+ years" },
+  { icon: Award, label: "Experience", value: "6+ years" },
   { icon: GraduationCap, label: "Education", value: "BCA, Computer Application" },
 ];
 

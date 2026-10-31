@@ -4,6 +4,7 @@ import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { PageLoader } from "@/components/common/PageLoader";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
+import { AssistantWidget } from "@/components/ai/AssistantWidget";
 
 export function MainLayout() {
   return (
@@ -16,6 +17,7 @@ export function MainLayout() {
         </Suspense>
       </main>
       <Footer />
+      <AssistantWidget />
     </div>
   );
 }
