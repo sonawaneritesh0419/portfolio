@@ -17,7 +17,7 @@ export default function About() {
       <PageHero
         eyebrow="About me"
         title="The story behind the components"
-        description="How five years across FinTech, HRMS, ERP and healthcare shaped the way I build frontend."
+        description="How six years across FinTech, HRMS, ERP and healthcare shaped the way I build frontend."
       />
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
@@ -35,8 +35,8 @@ export default function About() {
               that actually make the next PR easier to write.
             </p>
             <p className="mt-5 text-base leading-relaxed text-ink-muted sm:text-lg">
-              Outside of feature work, I mentor junior developers and enjoy
-              the unglamorous parts of frontend — CI/CD pipelines, reusable
+              Outside of feature work, I've led a team of three engineers, mentored
+              junior developers, and enjoy the unglamorous parts of frontend — CI/CD pipelines, reusable
               component libraries, and turning a messy design handoff into a
               clean, typed component API.
             </p>
@@ -59,7 +59,7 @@ export default function About() {
       <section className="border-t border-border bg-surface-2/40 px-6 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <SectionHeading eyebrow="Numbers" title="Impact at a glance" />
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {highlights.map((h) => (
               <Card key={h.label} className="p-4">
                 <p className="font-display text-2xl font-bold text-ink">{h.value}</p>

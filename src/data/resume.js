@@ -3,7 +3,7 @@
 
 export const profile = {
   name: "Ritesh Sonawane",
-  role: "Senior React / Frontend Engineer",
+  role: "Senior React Developer",
   location: "Mumbai, Maharashtra, India",
   email: "riteshsonawane0419@gmail.com",
   phone: "+91 9975783675",
@@ -14,6 +14,7 @@ export const profile = {
     "6+ years building scalable, secure, high-performance web apps across FinTech & Payments, Insurance, HRMS, ERP, Healthcare & E-commerce.",
   summary:
     "Senior React Developer with 6+ years of experience building scalable, secure, and high-performance web applications across FinTech & Payments, Insurance, HRMS, ERP, Healthcare, and E-commerce domains. Strong expertise in React.js, Next.js (App Router, SSR/SSG, API Routes), TypeScript, JavaScript (ES6+), Redux Toolkit, React Query, Zustand, REST API integration, reusable component architecture, and role-based access control. Experienced in leading a team of 3 engineers, driving frontend architecture, sprint planning, effort estimation, code reviews, UAT, production releases, and stakeholder coordination. Hands-on across the full SDLC — from requirement analysis and Figma-to-UI implementation through deployment and post-release support — with a focus on performance optimization, complex dashboards, secure workflows, and maintainable UI systems. Available to join immediately.",
+  // The PDF must exist in /public with exactly this file name.
   resumeFile: "/Ritesh_Sonawane_Senior_React_Developer_Resume.pdf",
 };
 
@@ -30,6 +31,8 @@ export const highlights = [
   { value: "25%", label: "Page-load improvement", trend: "up" },
 ];
 
+// Keys are rendered by GROUPS in src/pages/Skills.jsx.
+// `frontend` is also used for the "Core stack" teaser on the Home page.
 export const stack = {
   frontend: [
     "React.js (Hooks)",
@@ -72,6 +75,7 @@ export const stack = {
   practices: [
     "Frontend Architecture",
     "Component-Driven Design",
+    "Reusable Component Libraries",
     "Design Systems",
     "Micro-Frontends",
     "Clean Architecture",
@@ -85,6 +89,7 @@ export const stack = {
     "Effort Estimation",
     "Task Allocation",
     "Code Reviews",
+    "Debugging",
     "Mentoring",
     "Stakeholder Coordination",
   ],
@@ -101,10 +106,11 @@ export const stack = {
     "Jest",
     "React Testing Library",
     "Manual Testing",
+    "API Integration Validation",
     "UAT Support",
     "Semantic HTML / ARIA / Keyboard Navigation",
     "amCharts",
-    "AI-Assisted Dev Tools (Copilot, Cursor, Claude, ChatGPT)",
+    "AI-Assisted Dev Tools (ChatGPT, Claude, DeepSeek, OpenCode, Gemini, Copilot, Cursor, Perplexity)",
   ],
 };
 
@@ -114,7 +120,7 @@ export const experience = [
     role: "Senior Software Developer",
     period: "Jan 2025 — Sep 2026",
     location: "Mumbai, India",
-    current: true,
+    current: false,
     domain: "FinTech / HRMS / ERP",
     points: [
       "Led frontend architecture and development for enterprise SaaS and FinTech applications using React.js, Next.js (App Router, SSR/SSG), TypeScript, Redux Toolkit, React Query, and Zustand, ensuring consistent and maintainable development across product modules.",
@@ -201,7 +207,7 @@ export const experience = [
       "Modernized P-Gold and Epcproman by migrating legacy jQuery/Kendo UI interfaces to React.js and Redux, improving maintainability and modernizing core industrial workflows.",
       "Developed interactive project dashboards in Prodash using React.js and amCharts JS to visualize project schedules, costs, and risk metrics; integrated frontend components with backend APIs to support data-driven workflows.",
       "Reduced project delivery time by 25% on Epcproman through cross-functional collaboration and requirement alignment.",
-      "Translated Figma and Adobe XD mockups into pixel-accurate, production-ready React components across all 3 applications.",
+      "Translated Figma and Adobe XD mockups into pixel-accurate, production-ready React components across these applications.",
     ],
     tags: [
       "React.js",
@@ -238,7 +244,7 @@ export const projects = [
     name: "Marsh — Insurance Broker Platform",
     period: "2024",
     description:
-      "Responsive redesign for a global insurance broker's web platform — 30% engagement lift, 25% bounce-rate reduction, 40% mobile traffic growth, and 40% faster feature delivery.",
+      "Responsive redesign for a global insurance broker's web platform — 30% engagement lift, 25% bounce-rate reduction, 40% mobile traffic growth, and ~40% less feature development effort.",
     tags: ["React.js", "Redux", "Design Systems", "Responsive Design"],
     link: null,
   },

@@ -31,7 +31,10 @@ export default function Experience() {
                     </h3>
                     <span className="font-mono text-xs text-ink-faint">{job.period}</span>
                   </div>
-                  <p className="mt-1 text-xs text-ink-faint">{job.location}</p>
+                  <p className="mt-1 text-xs text-ink-faint">
+                    {job.location}
+                    {job.domain ? ` · ${job.domain}` : ""}
+                  </p>
 
                   <ul className="mt-4 space-y-2.5">
                     {job.points.map((point, i) => (
