@@ -1,10 +1,19 @@
-import { FolderKanban, ArrowUpRight } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { FolderKanban, ArrowUpRight, Sparkles } from "lucide-react";
+import { openChat, askAssistant } from "@/store/chatSlice";
 import { PageHero } from "@/components/ui/page-hero";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/resume";
 
 export default function Projects() {
+  const dispatch = useDispatch();
+
+  const askAboutProject = (name) => {
+    dispatch(openChat());
+    dispatch(askAssistant(`Explain the architecture of the ${name} project.`));
+  };
+
   return (
     <>
       <PageHero
@@ -52,6 +61,13 @@ export default function Projects() {
                   </Badge>
                 ))}
               </div>
+
+              <button
+                onClick={() => askAboutProject(project.name)}
+                className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-medium text-primary hover:underline cursor-pointer"
+              >
+                <Sparkles className="h-4 w-4" /> Ask AI about this project
+              </button>
             </Card>
           ))}
         </div>
