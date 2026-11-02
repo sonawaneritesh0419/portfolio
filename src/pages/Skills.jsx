@@ -10,7 +10,7 @@ const GROUPS = [
   { key: "tools", label: "Development Tools", icon: Wrench, variant: "coral" },
   { key: "practices", label: "Practices & Workflow", icon: Workflow, variant: "primary" },
   { key: "design", label: "UI & Design", icon: Palette, variant: "accent" },
-  { key: "extra", label: "Good to Have", icon: Sparkles, variant: "coral" },
+  { key: "extra", label: "Security, Testing & More", icon: Sparkles, variant: "coral" },
 ];
 
 export default function Skills() {
