@@ -41,6 +41,20 @@ function parseMessages(body) {
   return out;
 }
 
+// A request is allowed when it comes from a page served by THIS site (same-origin,
+// so previews and custom domains work automatically) or from an origin listed in
+// ALLOWED_ORIGINS. Other websites' browsers send a different Origin and are blocked.
+function isAllowedOrigin(req) {
+  const origin = req.headers.origin || "";
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  try {
+    return new URL(origin).host === req.headers.host;
+  } catch {
+    return false;
+  }
+}
+
 function getIp(req) {
   const h = req.headers;
   return String(h["x-vercel-forwarded-for"] || h["x-forwarded-for"] || h["x-real-ip"] || "unknown")
@@ -74,8 +88,7 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   // 1. Origin check (stops other websites using your endpoint from a browser).
-  const origin = req.headers.origin || "";
-  if (!ALLOWED_ORIGINS.includes(origin)) return res.status(403).json({ error: "Forbidden" });
+  if (!isAllowedOrigin(req)) return res.status(403).json({ error: "Forbidden" });
 
   // 2. Body validation + size cap.
   let body = req.body;
